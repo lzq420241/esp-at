@@ -11,7 +11,7 @@ jobs:
   build:
     uses: ./.github/workflows/build_template_esp32c5.yml
     with:
-      module_name: "WROOM-1"  # 根据您的实际模块名称修改，例如：MINI-1, WROOM-1 等
+      module_name: "ESP32C5-4MB"  # 根据您的实际模块名称修改，例如：MINI-1, WROOM-1 等
       artifacts_name: "esp32c5-at-artifacts"  # 构建产物的名称
       enable_at_debug: false  # 可选参数，是否启用 AT 调试日志
     secrets: inherit  # 继承 secrets，用于 OTA token
