@@ -9,8 +9,9 @@ on:
 
 jobs:
   build:
-    uses: ./.github/workflows/build_template_esp32c5.yml  # 引用您的可重用模板
-    # 如果模板需要参数，可以传递：
-    # with:
-    #   parameter_name: value
-    # secrets: inherit  # 如果需要使用 secrets
+    uses: ./.github/workflows/build_template_esp32c5.yml
+    with:
+      module_name: "WROOM-1"  # 根据您的实际模块名称修改，例如：MINI-1, WROOM-1 等
+      artifacts_name: "esp32c5-at-artifacts"  # 构建产物的名称
+      enable_at_debug: false  # 可选参数，是否启用 AT 调试日志
+    secrets: inherit  # 继承 secrets，用于 OTA token
