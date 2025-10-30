@@ -52,6 +52,11 @@ jobs:
     - name: Install compilation environment
       run: |
         ./build.py install
+    - name: Recreate module_info.json before build
+      run: |
+        mkdir -p build
+        echo -e "{\"platform\": \"$PLATFORM\", \"module\": \"$MODULE_NAME\", \"silence\": $SILENCE}" > build/module_info.json
+        cat build/module_info.json
     - name: Compile
       run: |
         ./build.py build
