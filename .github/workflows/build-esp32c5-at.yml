@@ -1,0 +1,16 @@
+name: Build ESP32C5-AT
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: ./.github/workflows/build_template_esp32c5.yml  # 引用您的可重用模板
+    # 如果模板需要参数，可以传递：
+    # with:
+    #   parameter_name: value
+    # secrets: inherit  # 如果需要使用 secrets
