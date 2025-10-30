@@ -3,7 +3,7 @@
 ###############################
 function setup_env_variables() {
   # module info
-  mkdir -p build
+  mkdir build
   echo -e "{\"platform\": \"$PLATFORM\", \"module\": \"$MODULE_NAME\", \"silence\": $SILENCE}" > build/module_info.json
 
   # module config directory
@@ -62,4 +62,46 @@ function disable_all_wifi_cmds() {
   echo -e "CONFIG_AT_DRIVER_COMMAND_SUPPORT=n" >> ${at_sdkconfig_file}
   echo -e "CONFIG_AT_WEB_SERVER_SUPPORT=n" >> ${at_sdkconfig_file}
   echo -e "CONFIG_AT_WEB_CAPTIVE_PORTAL_ENABLE=n" >> ${at_sdkconfig_file}
+  echo -e "CONFIG_AT_OTA_SUPPORT=n" >> ${at_sdkconfig_file}
+  echo -e "CONFIG_AT_MDNS_COMMAND_SUPPORT=n" >> ${at_sdkconfig_file}
+  echo -e "CONFIG_AT_WPS_COMMAND_SUPPORT=n" >> ${at_sdkconfig_file}
+  echo -e "CONFIG_AT_SMARTCONFIG_COMMAND_SUPPORT=n" >> ${at_sdkconfig_file}
+  echo -e "CONFIG_AT_PING_COMMAND_SUPPORT=n" >> ${at_sdkconfig_file}
+  echo -e "CONFIG_AT_MQTT_COMMAND_SUPPORT=n" >> ${at_sdkconfig_file}
+  echo -e "CONFIG_AT_HTTP_COMMAND_SUPPORT=n" >> ${at_sdkconfig_file}
+  echo -e "CONFIG_AT_SIGNALING_COMMAND_SUPPORT=n" >> ${at_sdkconfig_file}
+  echo -e "CONFIG_ESP_WIFI_SLP_IRAM_OPT=n" >> ${at_sdkconfig_file}
+}
+
+function enable_ethernet_cmds() {
+  echo -e "CONFIG_AT_ETHERNET_SUPPORT=y" >> ${at_sdkconfig_file}
+}
+
+function enable_bt_cmds() {
+  echo -e "CONFIG_AT_BT_COMMAND_SUPPORT=y" >> ${at_sdkconfig_file}
+  echo -e "CONFIG_AT_BT_SPP_COMMAND_SUPPORT=y" >> ${at_sdkconfig_file}
+  echo -e "CONFIG_AT_BT_A2DP_COMMAND_SUPPORT=y" >> ${at_sdkconfig_file}
+}
+
+function enable_ble_cmds() {
+  echo -e "CONFIG_AT_BLE_COMMAND_SUPPORT=y" >> ${at_sdkconfig_file}
+}
+
+function disable_ble_cmds() {
+  echo -e "CONFIG_AT_BLE_COMMAND_SUPPORT=n" >> ${at_sdkconfig_file}
+  echo -e "CONFIG_AT_BLE_HID_COMMAND_SUPPORT=n" >> ${at_sdkconfig_file}
+  echo -e "CONFIG_AT_BLUFI_COMMAND_SUPPORT=n" >> ${at_sdkconfig_file}
+  echo -e "CONFIG_AT_BT_COMMAND_SUPPORT=n" >> ${at_sdkconfig_file}
+}
+
+#########################
+# Enlarge app partition #
+#########################
+function enlarge_app_partition() {
+  app0_size=`cat ${module_cfg_dir}/partitions_at.csv | grep ota_0 | awk -F, '{print $5}'`
+  app1_size=`cat ${module_cfg_dir}/partitions_at.csv | grep ota_1 | awk -F, '{print $5}'`
+  to_set_size=$((app0_size + app1_size))
+  sed -i '/ota_1/d' ${module_cfg_dir}/partitions_at.csv
+  to_set_hex_size=`printf "0x%x" ${to_set_size}`
+  sed -i '/ota_0/s,'"$app0_size"','"$to_set_hex_size"',g' ${module_cfg_dir}/partitions_at.csv
 }
