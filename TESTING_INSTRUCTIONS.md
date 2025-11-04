@@ -18,14 +18,14 @@ sudo apt-get install avahi-utils
 # On macOS, avahi is pre-installed as Bonjour
 
 # Publish a test mDNS service with TXT records:
-avahi-publish -s my_test_device _my_printer._tcp 35 "version=v4.1.0.0" "model=ESP32" "status=ready"
+avahi-publish -s my_test_device _my_printer._tcp 631 "version=v4.1.0.0" "model=ESP32" "status=ready"
 ```
 
 ### Option 2: Using Windows with Bonjour
 1. Install Bonjour Service (comes with iTunes or standalone)
 2. Use dns-sd command:
 ```cmd
-dns-sd -R my_test_device _my_printer._tcp . 35 "version=v4.1.0.0" "model=ESP32"
+dns-sd -R my_test_device _my_printer._tcp . 631 "version=v4.1.0.0" "model=ESP32"
 ```
 
 ### Option 3: Using another ESP32 device
@@ -47,7 +47,7 @@ void app_main() {
         {"status", "ready"}
     };
     
-    mdns_service_add(NULL, "_my_printer", "_tcp", 35, txt_records, 3);
+    mdns_service_add(NULL, "_my_printer", "_tcp", 631, txt_records, 3);
 }
 ```
 
@@ -69,7 +69,7 @@ Expected output:
 IF=1
 IP=0
 PTR=my_test_device
-SRV=hostname.local:35
+SRV=hostname.local:631
 TXT=version=v4.1.0.0
 TXT=model=ESP32
 TXT=status=ready
@@ -95,7 +95,7 @@ AFTER FIX:
 IF=1
 IP=0
 PTR=my_test_device
-SRV=hostname.local:35
+SRV=hostname.local:631
 TXT=version=v4.1.0.0
 TXT=model=ESP32
 TXT=status=ready
@@ -112,7 +112,7 @@ Expected output:
 IF=1
 IP=0
 PTR=my_test_device
-SRV=hostname.local:35
+SRV=hostname.local:631
 
 OK
 ```
@@ -126,7 +126,7 @@ Expected output:
 IF=1
 IP=0
 PTR=my_test_device
-SRV=hostname.local:35
+SRV=hostname.local:631
 TXT=version=v4.1.0.0
 TXT=model=ESP32
 TXT=status=ready
