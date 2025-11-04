@@ -1,0 +1,18 @@
+diff --git a/components/mdns/mdns.c b/components/mdns/mdns.c
+index 1234567..abcdefg 100644
+--- a/components/mdns/mdns.c
++++ b/components/mdns/mdns.c
+@@ -4908,6 +4908,13 @@ static void _mdns_search_result_add_txt(mdns_search_once_t *search, mdns_txt_it
+         }
+ 
+         memset(r, 0, sizeof(mdns_result_t));
++        if (search->instance) {
++            r->instance_name = mdns_mem_strdup(search->instance);
++        }
++        if (search->service) {
++            r->service_type = mdns_mem_strdup(search->service);
++        }
++        r->proto = mdns_mem_strdup(search->proto);
+         r->txt = txt;
+         r->txt_value_len = txt_value_len;
+         r->txt_count = txt_count;
