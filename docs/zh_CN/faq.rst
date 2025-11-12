@@ -106,6 +106,11 @@ Wi-Fi 常见的兼容性问题有哪些？
 
   - phy mode 兼容性问题。如果路由器和 {IDF_TARGET_NAME} 之间的 phy mode 存在兼容性问题，那么建议切换路由器的 phy mode 或者 {IDF_TARGET_NAME} 的 phy mode。如果您要切换 {IDF_TARGET_NAME} 的 phy mode，请参考 :ref:`AT+CWSTAPROTO <cmd-STAPROTO>` 命令。
 
+使用 AT+CWSAP 以相同的配置重新配置 SoftAP 会发生什么？
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  当您使用与当前配置相同的参数执行 :ref:`AT+CWSAP <cmd-SAP>` 命令时，SoftAP 将重新启动。这将导致所有已连接的 station 断开连接。station 需要在 SoftAP 重新启动后重新连接。如果您只想查看当前 SoftAP 配置而不重新启动它，请使用查询命令 ``AT+CWSAP?``。
+
 ESP-AT 命令是否支持 ESP-WIFI-MESH？
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

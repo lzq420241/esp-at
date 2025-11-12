@@ -876,6 +876,7 @@ Wi-Fi AT 命令集
 -  本命令只有当 :ref:`AT+CWMODE=2 <cmd-MODE>` 或者 :ref:`AT+CWMODE=3 <cmd-MODE>` 时才有效
 -  若 :ref:`AT+SYSSTORE=1 <cmd-SYSSTORE>`，配置更改将保存在 NVS 分区
 -  默认 SSID 因设备而异，因为它由设备的 MAC 地址组成。 您可以使用 :ref:`AT+CWSAP? <cmd-SAP>` 查询默认的SSID。
+-  如果您使用相同的配置参数重新配置 SoftAP，SoftAP 将重新启动。所有已连接的 station 将断开连接，并需要重新连接。
 
 示例
 ^^^^
