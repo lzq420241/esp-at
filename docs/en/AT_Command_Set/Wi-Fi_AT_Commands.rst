@@ -876,6 +876,7 @@ Notes
 -  This command works only when :ref:`AT+CWMODE=2 <cmd-MODE>` or :ref:`AT+CWMODE=3 <cmd-MODE>`.
 -  The configuration changes will be saved in the NVS partition if :ref:`AT+SYSSTORE=1 <cmd-SYSSTORE>`.
 -  The default SSID varies from devices to device as it consists of the MAC address of the device. You can use :ref:`AT+CWSAP? <cmd-SAP>` to query the default SSID.
+-  If you reconfigure the SoftAP with the same configuration parameters, the SoftAP will restart. All connected stations will be disconnected and need to reconnect.
 
 Example
 ^^^^^^^^

@@ -106,6 +106,11 @@ What are the common Wi-Fi compatibility issues?
 
   - Phy mode compatibility issue. If there is a compatibility issue with the phy mode between the router and {IDF_TARGET_NAME}, it is recommended to switch it on the router or {IDF_TARGET_NAME}. For how to switch it on {IDF_TARGET_NAME}, please refer to the :ref:`AT+CWSTAPROTO <cmd-STAPROTO>` command.
 
+What happens when I reconfigure the SoftAP with the same configuration using AT+CWSAP?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  When you execute the :ref:`AT+CWSAP <cmd-SAP>` command with the same parameters as the current configuration, the SoftAP will restart. This will cause all connected stations to be disconnected. The stations will need to reconnect to the SoftAP after it restarts. If you want to check the current SoftAP configuration without restarting it, use the query command ``AT+CWSAP?`` instead.
+
 Do AT commands support ESP-WIFI-MESH?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
